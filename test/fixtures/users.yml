@@ -9,3 +9,20 @@ archer:
   name: Shiro Emiya
   email: duchess@example.gov
   password_digest: <%= User.digest("password") %>
+
+saber:
+  name: Arutoria Emiya
+  email: hands@example.gov
+  password_digest: <%= User.digest("password") %>
+
+lancer:
+  name: Gay Boruku
+  email: boss@example.gov
+  password_digest: <%= User.digest("password") %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest("password")%>
+<% end %>
