@@ -1,25 +1,24 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
-
   def setup
     ActionMailer::Base.deliveries.clear
   end
 
-  test "invalid signup information" do
+  test 'invalid signup information' do
     get signup_path
-    assert_no_difference "User.count" do
-      post users_path, params: {user: {name: "", email: "user@invalid", password: "foo", password_confirmation: "bar"}}
+    assert_no_difference 'User.count' do
+      post users_path, params: { user: { name: '', email: 'user@invalid', password: 'foo', password_confirmation: 'bar' } }
     end
-    assert_template "users/new"
-    assert_select "div#error_explanation"
-    assert_select "div.field_with_errors"
+    assert_template 'users/new'
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
   end
 
-  test "valid signup information with account activation" do
+  test 'valid signup information with account activation' do
     get signup_path
-    assert_difference "User.count", 1 do
-      post users_path, params: {user: {name: "Example User", email:"user@example.com", password: "hoge2hoge", password_confirmation: "hoge2hoge"} }
+    assert_difference 'User.count', 1 do
+      post users_path, params: { user: { name: 'Example User', email: 'user@example.com', password: 'hoge2hoge', password_confirmation: 'hoge2hoge' } }
     end
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)
@@ -28,18 +27,17 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     log_in_as(user)
     assert_not user.activated?
 
-    get edit_account_activation_path("Invalid token", email: user.email)
+    get edit_account_activation_path('Invalid token', email: user.email)
     assert_not is_logged_in?
 
-    get edit_account_activation_path(user.activation_token, email: "wrong")
+    get edit_account_activation_path(user.activation_token, email: 'wrong')
     assert_not is_logged_in?
 
     get edit_account_activation_path(user.activation_token, email: user.email)
     assert user.reload.activated?
 
     follow_redirect!
-    assert_template "users/show"
+    assert_template 'users/show'
     assert is_logged_in?
   end
-
 end
