@@ -1,9 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one:
+  follower: michael
+  followee: saber
 
-# one:
-#   follower_id: 1
-#   following_id: 1
-#
-# two:
-#   follower_id: 1
-#   following_id: 1
+two:
+  follower: michael
+  followee: lancer
+
+three:
+  follower: saber
+  followee: michael
+
+four:
+  follower: archer
+  followee: michael
