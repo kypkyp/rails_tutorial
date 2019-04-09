@@ -1,0 +1,15 @@
+one:
+  follower: michael
+  followee: saber
+
+two:
+  follower: michael
+  followee: lancer
+
+three:
+  follower: saber
+  followee: michael
+
+four:
+  follower: archer
+  followee: michael
